@@ -6,14 +6,17 @@ const client = new DiscordJS.Client();
 import dotenv from "dotenv";
 dotenv.config();
 
+// import card stack
+import { CardStack } from "./lib";
+
 // login message
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
-  // set avatar
-  client.user
-    .setAvatar("res/avatar.png")
-    .then((user) => console.log(`Avatar set!`));
+  // // set avatar
+  // client.user
+  //   .setAvatar("res/avatar.png")
+  //   .then((user) => console.log(`Avatar set!`));
 });
 
 // log in to bot
