@@ -7,6 +7,8 @@ interface Card {
 }
 
 interface PropertyCard extends Card {
+  color: PropertyColor;
+  houseCost: number;
   rent: [
     number, // base rent
     number, // one house
@@ -15,10 +17,14 @@ interface PropertyCard extends Card {
     number, // four houses
     number // hotel
   ];
-  houseCost: number;
-  color: PropertyColor;
 }
 
-interface UtilityCard extends Card {}
+interface UtilityCard extends Card {
+  originalValue: 150;
+  mortgageValue: 75;
+}
 
-interface RailroadCard extends Card {}
+interface RailroadCard extends Card {
+  originalValue: 200;
+  mortgageValue: 100;
+}
