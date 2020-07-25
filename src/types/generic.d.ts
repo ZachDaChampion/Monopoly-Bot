@@ -10,7 +10,13 @@ type PropertyColor =
   | "DARK BLUE";
 
 // house rules
-interface Ruleset {}
+interface Ruleset {
+  freeParkingBonus: number | "JACKPOT";
+  doubleOnGo: boolean;
+  noHousingShortage: boolean;
+  noRentInJail: boolean;
+  snakeEyesBonus: number;
+}
 
 interface JailData {
   inJail: boolean;
