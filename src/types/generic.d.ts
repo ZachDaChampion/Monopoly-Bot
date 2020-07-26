@@ -34,11 +34,19 @@ interface Player {
   jail: JailData;
 }
 
-type BoardEvent = string;
+type BoardEventId = string;
+
+interface BoardEvent {
+  description: string;
+  action: (player: Player, board: Board, ruleset: Ruleset) => void;
+}
+
+type Chance = BoardEvent;
+type CommunityChest = BoardEvent;
 
 interface Board {
   tiles: Array<TileId>;
   availableCards: Array<CardId>;
-  chanceStack: import("../lib").CardStack<BoardEvent>;
-  chestStack: import("../lib").CardStack<BoardEvent>;
+  chanceStack: import("../lib").CardStack<BoardEventId>;
+  chestStack: import("../lib").CardStack<BoardEventId>;
 }
