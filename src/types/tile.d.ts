@@ -17,21 +17,15 @@ interface PropertyTile extends PurchasableTile {
 }
 interface UtilityTile extends PurchasableTile {
   type: "UTILITY";
+  value: 150;
 }
 interface RailroadTile extends PurchasableTile {
   type: "RAILROAD";
+  value: 200;
 }
 
-// board event tiles
-interface BoardEventTile {}
-interface ChanceTile extends BoardEventTile {
-  type: "CHANCE";
-}
-interface ChestTile extends BoardEventTile {
-  type: "CHEST";
-}
+interface BoardEventTile extends Tile {}
 
-// assorted tiles
 interface TaxTile extends Tile {
   amount: number;
   type: "TAX";
