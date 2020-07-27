@@ -3,6 +3,7 @@ type TileId = string;
 // generic tile
 interface Tile {
   name: string;
+  type: string;
 }
 
 // purchasable tiles
@@ -12,20 +13,19 @@ interface PurchasableTile extends Tile {
 }
 interface PropertyTile extends PurchasableTile {
   color: PropertyColor;
+  type: "PROPERTY";
 }
-interface UtilityTile extends PurchasableTile {}
-interface RailroadTile extends PurchasableTile {}
+interface UtilityTile extends PurchasableTile {
+  type: "UTILITY";
+  value: 150;
+}
+interface RailroadTile extends PurchasableTile {
+  type: "RAILROAD";
+  value: 200;
+}
 
-// board event tiles
-interface BoardEventTile {}
-interface ChanceTile extends BoardEventTile {}
-interface ChestTile extends BoardEventTile {}
+interface BoardEventTile extends Tile {}
 
-// assorted tiles
 interface TaxTile extends Tile {
   amount: number;
 }
-interface GoTile extends Tile {}
-interface JailTile extends Tile {}
-interface ParkingTile extends Tile {}
-interface GoToJailTile extends Tile {}
