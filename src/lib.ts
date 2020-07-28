@@ -7,3 +7,7 @@ export class CardStack<T> {
     return new CardStack([...this.stack.slice(1), this.topCard]);
   }
 }
+
+export function isString(s): s is string {
+  return typeof s === "string";
+}

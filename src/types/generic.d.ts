@@ -24,21 +24,15 @@ interface JailData {
   rolls: number;
 }
 
-// player data
-interface Player {
-  location: number;
-  userId: string;
-  color: string;
-  cash: number;
-  cards: Array<CardId>;
-  jail: JailData;
-}
-
 type BoardEventId = string;
 
 interface BoardEvent {
   description: string;
-  action: (player: Player, board: Board, ruleset: Ruleset) => void;
+  action: (
+    player: import("./player").Player,
+    board: Board,
+    ruleset: Ruleset
+  ) => void;
 }
 
 type Chance = BoardEvent;
