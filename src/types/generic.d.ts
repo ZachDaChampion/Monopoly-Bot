@@ -9,36 +9,36 @@ type PropertyColor =
   | "GREEN"
   | "DARK BLUE";
 
-// house rules
-interface Ruleset {
-  freeParkingBonus: number | "JACKPOT";
-  doubleOnGo: boolean;
-  noHousingShortage: boolean;
-  noRentInJail: boolean;
-  snakeEyesBonus: number;
-}
-
-interface JailData {
-  inJail: boolean;
-  getOutFreeCards: number;
-  rolls: number;
-}
+// rename types for clarity
+type PlayerId = string;
+type BoardEventId = string;
 
 // player data
 interface Player {
-  location: number;
   userId: string;
   color: string;
   cash: number;
   cards: Array<CardId>;
-  jail: JailData;
+  location: number;
+  jail: {
+    inJail: boolean;
+    getOutFreeCards: number;
+    rolls: number;
+  };
 }
 
-type BoardEvent = string;
-
-interface Board {
-  tiles: Array<TileId>;
-  availableCards: Array<CardId>;
-  chanceStack: import("../lib").CardStack<BoardEvent>;
-  chestStack: import("../lib").CardStack<BoardEvent>;
+// game state
+interface Game {
+  ruleset: {
+    freeParkingBonus: number | "JACKPOT";
+    doubleOnGo: boolean;
+    noHousingShortage: boolean;
+    noRentInJail: boolean;
+    snakeEyesBonus: number;
+  };
+  players: Record<PlayerId, Player>;
+  board: Array<TileId>;
+  cards: Array<{ card: CardId; owner: PlayerId | null }>;
+  chance: Array<BoardEventId>;
+  chest: Array<BoardEventId>;
 }

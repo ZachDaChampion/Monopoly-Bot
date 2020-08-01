@@ -7,11 +7,18 @@ import dotenv from "dotenv";
 dotenv.config();
 
 // import card stack
-import { CardStack } from "./lib";
+import * as lib from "./lib";
 
 // login message
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
+
+  let stack = [1, 2, 3, 4, 5];
+
+  for (let i = 0; i < 15; ++i) {
+    console.log(stack);
+    stack = lib.moveToEnd(stack);
+  }
 
   // // set avatar
   // client.user

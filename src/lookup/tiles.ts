@@ -2,12 +2,12 @@ export default {
   chest: {
     name: "Community Chest",
     type: "CHEST",
-  } as BoardEventTile,
+  } as Tile,
 
   chance: {
     name: "Chance",
     type: "CHANCE",
-  } as BoardEventTile,
+  } as Tile,
 
   go: {
     name: "GO",
@@ -62,7 +62,7 @@ export default {
   jail: {
     name: "Jail (Just visiting)",
     type: "JAIL",
-  },
+  } as Tile,
 
   "stc-plc": {
     name: "St. Charles Place",
@@ -174,7 +174,7 @@ export default {
   "go-jail": {
     name: "Go to jail",
     type: "GOTOJAIL",
-  },
+  } as Tile,
 
   "pac-ave": {
     name: "Pacific Avenue",

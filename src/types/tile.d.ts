@@ -24,8 +24,6 @@ interface RailroadTile extends PurchasableTile {
   value: 200;
 }
 
-interface BoardEventTile extends Tile {}
-
 interface TaxTile extends Tile {
   amount: number;
 }
