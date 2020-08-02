@@ -1,5 +1,5 @@
 export class RecyclingQueue<T> {
-  arr: Array<T>;
+  private arr: Array<T>;
 
   constructor(arr: Array<T> = []) {
     this.arr = arr;
@@ -35,5 +35,29 @@ export class RecyclingQueue<T> {
       const j = Math.floor(Math.random() * (i + 1));
       [this.arr[i], this.arr[j]] = [this.arr[j], this.arr[i]];
     }
+  }
+}
+
+export class Stack<T> {
+  private arr: Array<T>;
+
+  constructor(arr: Array<T> = []) {
+    this.arr = arr;
+  }
+
+  get top(): T {
+    return this.arr[this.arr.length - 1];
+  }
+
+  get size(): number {
+    return this.arr.length;
+  }
+
+  push(el: T) {
+    this.arr.push(el);
+  }
+
+  pop(): T {
+    return this.arr.pop();
   }
 }

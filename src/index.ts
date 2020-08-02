@@ -13,8 +13,6 @@ import * as lib from "./lib";
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
-  let stack = new lib.RecyclingQueue([1, 2, 3, 4, 5]);
-
   // // set avatar
   // client.user
   //   .setAvatar("res/avatar.png")
