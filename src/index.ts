@@ -13,10 +13,15 @@ import * as lib from "./lib";
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
-  // // set avatar
   // client.user
   //   .setAvatar("res/avatar.png")
   //   .then((user) => console.log(`Avatar set!`));
+});
+
+client.on("message", (msg) => {
+  // TODO: interpret command
+  // TODO: send command to context
+  // TODO: handle context
 });
 
 // log in to bot

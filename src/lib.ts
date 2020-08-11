@@ -19,13 +19,13 @@ export class RecyclingQueue<T> {
     return result;
   }
 
-  remove(): T {
+  pop(): T {
     const result = this.top;
     this.arr = this.arr.slice(1);
     return result;
   }
 
-  add(el: T) {
+  push(el: T) {
     this.arr.push(el);
   }
 
@@ -35,6 +35,32 @@ export class RecyclingQueue<T> {
       const j = Math.floor(Math.random() * (i + 1));
       [this.arr[i], this.arr[j]] = [this.arr[j], this.arr[i]];
     }
+  }
+}
+
+export class Queue<T> {
+  private arr: Array<T>;
+
+  constructor(arr: Array<T> = []) {
+    this.arr = arr;
+  }
+
+  get top(): T {
+    return this.arr[0];
+  }
+
+  get size(): number {
+    return this.arr.length;
+  }
+
+  pop(): T {
+    const result = this.top;
+    this.arr = this.arr.slice(1);
+    return result;
+  }
+
+  push(el: T) {
+    this.arr.push(el);
   }
 }
 
@@ -60,4 +86,8 @@ export class Stack<T> {
   pop(): T {
     return this.arr.pop();
   }
+}
+
+export function mention(id: string) {
+  return `<@${id}>`;
 }
