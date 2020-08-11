@@ -27,6 +27,17 @@ interface Player {
   };
 }
 
+interface Context {
+  readonly canExit: boolean;
+  setup();
+  enter();
+  exit();
+  handleCommand(
+    command: Command,
+    properties: Array<{ prop: string | null; data: string }>
+  );
+}
+
 type Command =
   | "ROLL"
   | "OFFER"

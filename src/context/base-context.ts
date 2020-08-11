@@ -1,16 +1,5 @@
-import { Game } from "./game";
-import { mention } from "./lib";
-
-export interface Context {
-  readonly canExit: boolean;
-  setup();
-  enter();
-  exit();
-  handleCommand(
-    command: Command,
-    properties: Array<{ prop: string | null; data: string }>
-  );
-}
+import { Game } from "../game";
+import { mention } from "../lib";
 
 export class ContextBase implements Context {
   constructor(game: Game) {
