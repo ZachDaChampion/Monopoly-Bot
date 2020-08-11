@@ -27,18 +27,14 @@ interface Player {
   };
 }
 
-// game state
-interface Game {
-  ruleset: {
-    freeParkingBonus: number | "JACKPOT";
-    doubleOnGo: boolean;
-    noHousingShortage: boolean;
-    noRentInJail: boolean;
-    snakeEyesBonus: number;
-  };
-  players: Record<PlayerId, Player>;
-  board: Array<TileId>;
-  cards: Array<{ card: CardId; owner: PlayerId | null }>;
-  chance: Array<BoardEventId>;
-  chest: Array<BoardEventId>;
-}
+type Command =
+  | "ROLL"
+  | "OFFER"
+  | "MORTGAGE"
+  | "UNMORTGAGE"
+  | "ENDTURN"
+  | "BUYTILE"
+  | "USECARD"
+  | "PAY";
+
+type DiceRoll = [number, number];
