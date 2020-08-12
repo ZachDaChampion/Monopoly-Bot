@@ -46,6 +46,8 @@ type Command =
   | "ENDTURN"
   | "BUYTILE"
   | "USECARD"
-  | "PAY";
+  | "PAY"
+  | "ACCEPT"
+  | "DECLINE";
 
 type DiceRoll = [number, number];

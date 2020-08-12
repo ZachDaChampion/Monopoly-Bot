@@ -44,49 +44,46 @@ export class ContextInsufficientFunds implements Context {
 
   handleCommand(command: Command, properties: Record<string, any>) {
     switch (command) {
-      case "OFFER":
-        {
-          // TODO: this
-        }
+      case "OFFER": {
+        // TODO: this
         break;
+      }
 
-      case "MORTGAGE":
-        {
-          switch (this.game.mortgate(properties.id, this.playerId)) {
-            case "ALREADY-MORTGAGED":
-              this.game.queueMessage(
-                `${cardLookup[properties.id].name} is already mortgaged.`
-              );
-              break;
-            case "NOT-OWNER":
-              this.game.queueMessage(
-                `${mention(
-                  this.game.cards[properties.id].owner
-                )} is the owner of ${
-                  cardLookup[properties.id].name
-                }, so you cannot mortage it.`
-              );
-              break;
-            case "SUCCESS":
-              this.game.queueMessage(
-                `${mention(this.playerId)} has mortgaged ${
-                  cardLookup[properties.id].name
-                } for $${cardLookup[properties.id].mortgageValue}.`
-              );
-              break;
-          }
-        }
-        break;
-
-      case "PAY":
-        {
-          if (this.player.cash < this._requiredMoney)
+      case "MORTGAGE": {
+        switch (this.game.mortgate(properties.id, this.playerId)) {
+          case "ALREADY-MORTGAGED":
             this.game.queueMessage(
-              `You're $${this._requiredMoney - this.player.cash} short!`
+              `${cardLookup[properties.id].name} is already mortgaged.`
             );
-          else this._payed = true;
+            break;
+          case "NOT-OWNER":
+            this.game.queueMessage(
+              `${mention(
+                this.game.cards[properties.id].owner
+              )} is the owner of ${
+                cardLookup[properties.id].name
+              }, so you cannot mortage it.`
+            );
+            break;
+          case "SUCCESS":
+            this.game.queueMessage(
+              `${mention(this.playerId)} has mortgaged ${
+                cardLookup[properties.id].name
+              } for $${cardLookup[properties.id].mortgageValue}.`
+            );
+            break;
         }
         break;
+      }
+
+      case "PAY": {
+        if (this.player.cash < this._requiredMoney)
+          this.game.queueMessage(
+            `You're $${this._requiredMoney - this.player.cash} short!`
+          );
+        else this._payed = true;
+        break;
+      }
     }
     this.game.sendMessageQueue();
   }

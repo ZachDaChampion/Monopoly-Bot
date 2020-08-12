@@ -1,3 +1,4 @@
-* ~~base~~
-* ~~insufficient funds~~
-* offer
+- ~~base~~
+- ~~insufficient funds~~
+- offer
+- auction

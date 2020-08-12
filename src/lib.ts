@@ -91,3 +91,16 @@ export class Stack<T> {
 export function mention(id: string) {
   return `<@${id}>`;
 }
+
+export function listArray<T>(arr: Array<T>): string {
+  if (arr.length <= 0) return "nothing";
+  if (arr.length === 2) return `${arr[0]} and ${arr[1]}`;
+
+  let result = `${arr[0]}`;
+  for (let i = 1; i < arr.length; ++i) {
+    if (i === arr.length - 1) result += ", and ";
+    else result += ", ";
+    result += `${arr[i]}`;
+  }
+  return result;
+}
