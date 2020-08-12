@@ -3,7 +3,16 @@ type TileId = string;
 // generic tile
 interface Tile {
   name: string;
-  type: string;
+  type:
+    | "PROPERTY"
+    | "UTILITY"
+    | "RAILROAD"
+    | "CHEST"
+    | "CHANCE"
+    | "GO"
+    | "JAIL"
+    | "PARKING"
+    | "GOTOJAIL";
 }
 
 // purchasable tiles

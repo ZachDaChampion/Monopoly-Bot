@@ -18,7 +18,10 @@ export class Game {
   };
   players: Record<PlayerId, Player>;
   board: Array<TileId>;
-  cards: Record<CardId, { mortgaged: boolean; owner: PlayerId | null }>;
+  cards: Record<
+    CardId,
+    { mortgaged: boolean; houses: number; owner: PlayerId | null }
+  >;
   houses: number;
   hotels: number;
   chance: RecyclingQueue<BoardEventId>;
@@ -33,6 +36,17 @@ export class Game {
   tileOf(player: PlayerId | null = null) {
     if (!player) player = this.currentTurn;
     return tileLookup[this.board[this.players[this.currentTurn].location]];
+  }
+
+  cardOf(player: PlayerId | null = null) {
+    if (!player) player = this.currentTurn;
+    return cardLookup[(this.tileOf(player) as PurchasableTile).cardId];
+  }
+
+  rentOf(tile: Tile) {
+    return (cardLookup[(tile as PropertyTile).cardId] as PropertyCard).rent[
+      this.cards[(tile as PropertyTile).cardId].houses
+    ];
   }
 
   queueMessage(msg: string) {
@@ -50,6 +64,7 @@ export class Game {
   }
 
   addContext(ctxt: Context) {
+    this.sendMessageQueue();
     this.contextStack.push(ctxt);
     this.context.setup();
   }
@@ -62,6 +77,12 @@ export class Game {
       this.handleContext();
     } else this.context.enter();
   }
+
+  pay(
+    amount: number,
+    payer: PlayerId,
+    recipient: PlayerId | "BANK" | "JACKPOT"
+  ) {}
 
   giveMoney(amount: number, player: PlayerId | null = null) {
     if (!player) player = this.currentTurn;

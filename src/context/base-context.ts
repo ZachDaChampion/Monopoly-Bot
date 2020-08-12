@@ -1,6 +1,7 @@
 import { Game } from "../game";
 import { mention } from "../lib";
 import cardLookup from "../lookup/cards";
+import tileLookup from "../lookup/tiles";
 import { ContextOffer } from "./offer-context";
 
 export class ContextBase implements Context {
@@ -92,7 +93,60 @@ export class ContextBase implements Context {
             this.game.tileOf(this.playerId).name
           }.`
         );
-        // TODO: rent
+
+        // handle tile
+        switch (this.game.tileOf(this.playerId).type) {
+          case "PROPERTY": {
+            // player is owner
+            if (
+              this.game.cards[
+                (this.game.tileOf(this.playerId) as PropertyTile).cardId
+              ].owner === this.playerId
+            ) {
+              this.game.queueMessage(`You already own it!`);
+            }
+
+            // someone else is owner
+            else if (
+              this.game.cards[
+                (this.game.tileOf(this.playerId) as PropertyTile).cardId
+              ].owner
+            ) {
+              this.game.queueMessage(
+                `Uh oh, ${this.game.tileOf(this.playerId).name} is owned by ${
+                  this.game.cards[
+                    (this.game.tileOf(this.playerId) as PropertyTile).cardId
+                  ].owner
+                }! Gotta pay the rent!`
+              );
+              this.game.pay(
+                this.game.rentOf(this.game.tileOf(this.playerId)),
+                this.playerId,
+                this.game.cards[
+                  (this.game.tileOf(this.playerId) as PropertyTile).cardId
+                ].owner
+              );
+            }
+
+            // noone is owner
+            else {
+              if (
+                this.player.cash < this.game.cardOf(this.playerId).originalValue
+              ) {
+                this.game.queueMessage(
+                  `You need $${
+                    this.game.cardOf(this.playerId).originalValue
+                  } to buy this property, but you only have $${
+                    this.player.cash
+                  }. Time for an auction!`
+                );
+                // TODO: auction
+              }
+              // TODO: auction or buy
+            }
+            break;
+          }
+        }
         break;
       }
 
