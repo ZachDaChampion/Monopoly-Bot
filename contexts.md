@@ -1,4 +1,5 @@
 - ~~base~~
 - ~~insufficient funds~~
-- offer
+- ~~offer~~
 - auction
+- jail
