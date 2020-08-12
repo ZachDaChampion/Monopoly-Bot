@@ -1,6 +1,7 @@
 import { RecyclingQueue, Queue, Stack } from "./lib";
 import { Client, TextChannel } from "discord.js";
-import Tiles from "./lookup/tiles";
+import tileLookup from "./lookup/tiles";
+import cardLookup from "./lookup/cards";
 
 // game state
 export class Game {
@@ -17,7 +18,7 @@ export class Game {
   };
   players: Record<PlayerId, Player>;
   board: Array<TileId>;
-  cards: Array<{ card: CardId; owner: PlayerId | null }>;
+  cards: Record<CardId, { mortgaged: boolean; owner: PlayerId | null }>;
   houses: number;
   hotels: number;
   chance: RecyclingQueue<BoardEventId>;
@@ -31,7 +32,7 @@ export class Game {
 
   tileOf(player: PlayerId | null = null) {
     if (!player) player = this.currentTurn;
-    return Tiles[this.board[this.players[this.currentTurn].location]];
+    return tileLookup[this.board[this.players[this.currentTurn].location]];
   }
 
   queueMessage(msg: string) {
@@ -65,6 +66,20 @@ export class Game {
   giveMoney(amount: number, player: PlayerId | null = null) {
     if (!player) player = this.currentTurn;
     this.players[player].cash + amount;
+  }
+
+  mortgate(
+    prop: CardId,
+    player: PlayerId | null = null
+  ): "ALREADY-MORTGAGED" | "NOT-OWNER" | "SUCCESS" {
+    if (this.cards[prop].mortgaged) return "ALREADY-MORTGAGED";
+
+    if (!player) player = this.currentTurn;
+    if (this.cards[prop].owner != player) return "NOT-OWNER";
+
+    this.players[player].cash += cardLookup[prop].mortgageValue;
+    this.cards[prop].mortgaged = true;
+    return "SUCCESS";
   }
 
   sendToJail(player: PlayerId | null = null) {
