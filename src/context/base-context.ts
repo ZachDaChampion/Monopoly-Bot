@@ -1,6 +1,7 @@
 import { Game } from "../game";
 import { mention } from "../lib";
 import cardLookup from "../lookup/cards";
+import { ContextOffer } from "./offer-context";
 
 export class ContextBase implements Context {
   constructor(game: Game) {
@@ -96,7 +97,16 @@ export class ContextBase implements Context {
       }
 
       case "OFFER": {
-        // TODO: this
+        this.game.addContext(
+          new ContextOffer(
+            this.game,
+            this.playerId,
+            properties.offereeId,
+            properties.giveCards,
+            properties.getCards,
+            properties.giveCash
+          )
+        );
         break;
       }
 

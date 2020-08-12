@@ -2,7 +2,14 @@ import { Game } from "../game";
 import { mention, listArray } from "../lib";
 
 export class ContextOffer implements Context {
-  constructor(game: Game, offerorId: PlayerId, offereeId: PlayerId) {
+  constructor(
+    game: Game,
+    offerorId: PlayerId,
+    offereeId: PlayerId,
+    giveCards: Array<CardId>,
+    getCards: Array<CardId>,
+    giveCash: number
+  ) {
     this.game = game;
     this.offerorId = offerorId;
     this.offereeId = offereeId;

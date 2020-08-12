@@ -1,6 +1,7 @@
 import { Game } from "../game";
 import { mention } from "../lib";
 import cardLookup from "../lookup/cards";
+import { ContextOffer } from "./offer-context";
 
 export class ContextInsufficientFunds implements Context {
   constructor(game: Game, playerId: PlayerId, requiredMoney: number) {
@@ -45,7 +46,14 @@ export class ContextInsufficientFunds implements Context {
   handleCommand(command: Command, properties: Record<string, any>) {
     switch (command) {
       case "OFFER": {
-        // TODO: this
+        new ContextOffer(
+          this.game,
+          this.playerId,
+          properties.offereeId,
+          properties.giveCards,
+          properties.getCards,
+          properties.giveCash
+        );
         break;
       }
 
