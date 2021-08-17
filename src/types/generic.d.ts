@@ -48,6 +48,8 @@ type Command =
   | "USECARD"
   | "PAY"
   | "ACCEPT"
-  | "DECLINE";
+  | "DECLINE"
+  | "BUY"
+  | "AUCTION";
 
 type DiceRoll = [number, number];
